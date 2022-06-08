@@ -2,30 +2,63 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.234.0/containers/ruby-rails-postgres
 // Update the VARIANT arg in docker-compose.yml to pick a Ruby version
 {
-	"name": "Ruby on Rails & Postgres",
+	"name": "global-assessment-platform",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
-	"workspaceFolder": "/workspace",
+	"workspaceFolder": "/workspace/global-assessment-platform",
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { },
-
-	// Add the IDs of extensions you want installed when the container is created.
-	"extensions": [
-		"rebornix.Ruby",
-		"misogi.ruby-rubocop"
-	],
+	"shutdownAction": "stopCompose",
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// This can be used to network with other containers or the host.
 	// "forwardPorts": [3000, 5432],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "bundle install",
+	"postCreateCommand": "bundle install dev-entrypoint db:migrate:status",
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
 	"features": {
 		"git": "latest"
-	}
+	},
+
+	"extensions": [
+    // Integrates ESLint into VS Code:
+    "dbaeumer.vscode-eslint",
+
+    "KoichiSasada.vscode-rdbg",
+
+    // Provides enhanced Ruby language and debugging support for Visual Studio
+    // Code:
+    "rebornix.ruby",
+
+    // execute rubocop for current Ruby code.
+    "misogi.ruby-rubocop",
+
+    // A language server that provides intellisense, code completion, and inline
+    // documentation for Ruby:
+    "castwide.solargraph",
+
+    // Search modules, class and methods in ruby files using vscode go to symbol:
+    "miguel-savignano.ruby-symbols",
+
+    // Git Lens:
+    "eamodio.gitlens",
+
+    // PostCSS Language Support:
+    // - see https://tailwindcss.com/docs/editor-setup#syntax-support
+    "csstools.postcss",
+
+    // IntelliSense for VS Code:
+    // - see https://tailwindcss.com/docs/editor-setup#intelli-sense-for-vs-code
+    "bradlc.vscode-tailwindcss",
+
+    // Pull Request and Issue Provider for GitHub:
+    "github.vscode-pull-request-github",
+
+    // Use GitHub Copilot when available:
+    "github.copilot"
+  ]
 }
